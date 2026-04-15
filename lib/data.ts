@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import { supabase, isConfigured } from './supabase';
 import {
   mockArtifacts,
@@ -9,129 +10,180 @@ import {
 } from './mock-data';
 import type { Artifact, Article, EventItem, Category, Collection, ContactMessage } from './types';
 
-// ─── Artifacts ────────────────────────────────────────────────────────────────
+function logSupabaseError(label: string, error: { message: string } | null) {
+  if (error) {
+    console.error(`[supabase:${label}] ${error.message}`);
+  }
+}
 
 export async function getPublishedArtifacts(): Promise<Artifact[]> {
+  noStore();
   if (!isConfigured || !supabase) {
-    return mockArtifacts.filter((a) => a.status === 'published');
+    return mockArtifacts.filter((artifact) => artifact.status === 'published');
   }
-  const { data } = await supabase
+
+  const { data, error } = await supabase
     .from('artifacts')
     .select('*, collection:collections(*)')
     .eq('status', 'published')
     .order('created_at', { ascending: false });
-  return (data as Artifact[]) ?? mockArtifacts.filter((a) => a.status === 'published');
+
+  logSupabaseError('getPublishedArtifacts', error);
+  return (data as Artifact[]) ?? [];
 }
 
 export async function getArtifactById(id: string): Promise<Artifact | null> {
+  noStore();
   if (!isConfigured || !supabase) {
-    return mockArtifacts.find((a) => a.id === id) ?? null;
+    return mockArtifacts.find((artifact) => artifact.id === id) ?? null;
   }
-  const { data } = await supabase
+
+  const { data, error } = await supabase
     .from('artifacts')
     .select('*, collection:collections(*)')
     .eq('id', id)
     .single();
-  return (data as Artifact) ?? mockArtifacts.find((a) => a.id === id) ?? null;
+
+  logSupabaseError('getArtifactById', error);
+  return (data as Artifact) ?? null;
 }
 
 export async function getAllArtifacts(): Promise<Artifact[]> {
-  if (!isConfigured || !supabase) return mockArtifacts;
-  const { data } = await supabase
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockArtifacts;
+  }
+
+  const { data, error } = await supabase
     .from('artifacts')
     .select('*, collection:collections(*)')
     .order('created_at', { ascending: false });
-  return (data as Artifact[]) ?? mockArtifacts;
+
+  logSupabaseError('getAllArtifacts', error);
+  return (data as Artifact[]) ?? [];
 }
 
-// ─── Articles ─────────────────────────────────────────────────────────────────
-
 export async function getPublishedArticles(): Promise<Article[]> {
+  noStore();
   if (!isConfigured || !supabase) {
-    return mockArticles.filter((a) => a.status === 'published');
+    return mockArticles.filter((article) => article.status === 'published');
   }
-  const { data } = await supabase
+
+  const { data, error } = await supabase
     .from('articles')
     .select('*')
     .eq('status', 'published')
     .order('created_at', { ascending: false });
-  return (data as Article[]) ?? mockArticles.filter((a) => a.status === 'published');
+
+  logSupabaseError('getPublishedArticles', error);
+  return (data as Article[]) ?? [];
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-  if (!isConfigured || !supabase) return mockArticles;
-  const { data } = await supabase
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockArticles;
+  }
+
+  const { data, error } = await supabase
     .from('articles')
     .select('*')
     .order('created_at', { ascending: false });
-  return (data as Article[]) ?? mockArticles;
+
+  logSupabaseError('getAllArticles', error);
+  return (data as Article[]) ?? [];
 }
 
-// ─── Events ───────────────────────────────────────────────────────────────────
-
 export async function getPublishedEvents(): Promise<EventItem[]> {
+  noStore();
   if (!isConfigured || !supabase) {
-    return mockEvents.filter((e) => e.status === 'published');
+    return mockEvents.filter((eventItem) => eventItem.status === 'published');
   }
-  const { data } = await supabase
+
+  const { data, error } = await supabase
     .from('events')
     .select('*')
     .eq('status', 'published')
     .order('start_date', { ascending: true });
-  return (data as EventItem[]) ?? mockEvents.filter((e) => e.status === 'published');
+
+  logSupabaseError('getPublishedEvents', error);
+  return (data as EventItem[]) ?? [];
 }
 
 export async function getAllEvents(): Promise<EventItem[]> {
-  if (!isConfigured || !supabase) return mockEvents;
-  const { data } = await supabase
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockEvents;
+  }
+
+  const { data, error } = await supabase
     .from('events')
     .select('*')
     .order('created_at', { ascending: false });
-  return (data as EventItem[]) ?? mockEvents;
-}
 
-// ─── Categories ───────────────────────────────────────────────────────────────
+  logSupabaseError('getAllEvents', error);
+  return (data as EventItem[]) ?? [];
+}
 
 export async function getCategories(): Promise<Category[]> {
-  if (!isConfigured || !supabase) return mockCategories;
-  const { data } = await supabase.from('categories').select('*').order('name');
-  return (data as Category[]) ?? mockCategories;
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockCategories;
+  }
+
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .order('name');
+
+  logSupabaseError('getCategories', error);
+  return (data as Category[]) ?? [];
 }
 
-// ─── Collections ──────────────────────────────────────────────────────────────
-
 export async function getCollections(): Promise<Collection[]> {
-  if (!isConfigured || !supabase) return mockCollections;
-  const { data } = await supabase
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockCollections;
+  }
+
+  const { data, error } = await supabase
     .from('collections')
     .select('*, category:categories(*)')
     .order('name');
-  return (data as Collection[]) ?? mockCollections;
+
+  logSupabaseError('getCollections', error);
+  return (data as Collection[]) ?? [];
 }
 
-// ─── Contact Messages ─────────────────────────────────────────────────────────
-
 export async function getAllContactMessages(): Promise<ContactMessage[]> {
-  if (!isConfigured || !supabase) return mockContactMessages;
-  const { data } = await supabase
+  noStore();
+  if (!isConfigured || !supabase) {
+    return mockContactMessages;
+  }
+
+  const { data, error } = await supabase
     .from('contact_messages')
     .select('*')
     .order('created_at', { ascending: false });
-  return (data as ContactMessage[]) ?? mockContactMessages;
+
+  logSupabaseError('getAllContactMessages', error);
+  return (data as ContactMessage[]) ?? [];
 }
 
-// ─── Top viewed artifacts ─────────────────────────────────────────────────────
-
 export async function getTopViewedArtifacts(limit = 5): Promise<Artifact[]> {
+  noStore();
   if (!isConfigured || !supabase) {
     return [...mockArtifacts]
-      .sort((a, b) => (b.view_count ?? 0) - (a.view_count ?? 0))
+      .sort((left, right) => (right.view_count ?? 0) - (left.view_count ?? 0))
       .slice(0, limit);
   }
-  const { data } = await supabase
+
+  const { data, error } = await supabase
     .from('artifacts')
     .select('id, name, view_count, status')
     .order('view_count', { ascending: false })
     .limit(limit);
+
+  logSupabaseError('getTopViewedArtifacts', error);
   return (data as Artifact[]) ?? [];
 }

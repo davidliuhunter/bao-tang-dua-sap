@@ -73,9 +73,11 @@ bao-tang-nextjs/
 ├── lib/
 │   ├── types.ts                  # TypeScript interfaces (Artifact, Article, etc.)
 │   ├── supabase.ts               # Supabase client + isConfigured flag
-│   ├── data.ts                   # Read functions (getArtifacts, getArticles, etc.)
+│   ├── data.ts                   # Read functions (noStore + live Supabase when configured)
 │   ├── actions.ts                # Server Actions (CRUD + uploadImage + trackView)
 │   └── mock-data.ts              # Mock data dùng khi Supabase chưa cấu hình
+├── scripts/
+│   └── seed-real-supabase-data.mjs # Seed dữ liệu thật từ nguồn công khai về dừa sáp
 ├── supabase/
 │   ├── config.toml               # Supabase CLI config
 │   ├── 001_schema.sql            # Schema gốc (reference)
@@ -167,6 +169,20 @@ export const supabase = isConfigured ? createClient(...) : null;
 ```
 
 Khi `isConfigured = false`, app dùng mock data từ `lib/mock-data.ts` — cho phép chạy local không cần Supabase.
+
+Khi `isConfigured = true`, các hàm trong `lib/data.ts` phải đọc trực tiếp từ Supabase bằng `unstable_noStore()`. Không được fallback về mock data nếu query live lỗi, vì điều đó sẽ che khuất lỗi runtime và làm site public hiển thị dữ liệu giả.
+
+### Trạng thái dữ liệu thực tế hiện tại
+- Public pages `/`, `/hien-vat`, `/bai-viet`, `/su-kien` đã được xác nhận hiển thị dữ liệu thật từ Supabase.
+- Script `scripts/seed-real-supabase-data.mjs` seed bộ dữ liệu bám nguồn công khai về dừa sáp Cầu Kè, Festival 100 năm dừa sáp Trà Vinh và nghiên cứu cấy phôi của Trường Đại học Trà Vinh.
+- Bộ dữ liệu seed hiện tại gồm 4 categories, 4 collections, 5 artifacts, 4 articles, 3 events.
+- Live database có thể chưa có cột `artifacts.view_count` dù migration đã tồn tại trong repo; script seed đã tự dò cột này và bỏ qua nếu DB runtime chưa apply migration.
+
+### Nguồn tham khảo nội dung công khai đã dùng
+- https://duasap.com.vn/dua-sap-dac-san-tru-danh-cua-tra-vinh/
+- https://vtv.vn/doi-song/tra-vinh-to-chuc-festival-100-nam-dua-sap-20240814125159359.htm
+- https://special.nhandan.vn/Dau-an-Festival-100-nam-dua-sap-Tra-Vinh/index.html
+- https://nhandan.vn/truong-dai-hoc-tra-vinh-nghien-cuu-thanh-cong-giong-dua-sap-cay-phoi-post834454.html
 
 ---
 
