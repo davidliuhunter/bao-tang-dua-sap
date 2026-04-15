@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import PublicLayout from '@/components/PublicLayout';
 import ArtifactImageClient from '@/components/ArtifactImageClient';
 import { getArtifactById, getPublishedArtifacts } from '@/lib/data';
+import { ChevronLeft } from 'lucide-react';
 
 export async function generateStaticParams() {
   const artifacts = await getPublishedArtifacts();
@@ -30,7 +31,7 @@ export default async function ArtifactDetailPage({ params }: { params: { id: str
           href="/hien-vat"
           className="inline-flex items-center gap-1 text-amber-600 hover:text-amber-800 text-sm mb-8"
         >
-          ← Quay lại danh sách hiện vật
+          <ChevronLeft className="w-4 h-4" /> Quay lại danh sách hiện vật
         </Link>
 
         <div className="grid md:grid-cols-2 gap-12">

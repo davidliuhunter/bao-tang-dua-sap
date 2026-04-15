@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllEvents } from '@/lib/data';
 import { saveEvent, deleteEvent } from '@/lib/actions';
 import type { EventItem } from '@/lib/types';
+import { X } from 'lucide-react';
 
 const EMPTY: Partial<EventItem> = {};
 
@@ -112,7 +113,7 @@ export default function AdminEventsPage() {
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm sticky top-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-gray-800">{editing.id ? 'Chỉnh sửa' : 'Sự kiện mới'}</h2>
-              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-700 text-lg">✕</button>
+              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-700 p-0.5 rounded transition-colors"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={handleSave} className="space-y-3">
               <div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllContactMessages } from '@/lib/data';
 import { markMessageRead } from '@/lib/actions';
 import type { ContactMessage } from '@/lib/types';
+import { X, ChevronRight, Mail } from 'lucide-react';
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -67,7 +68,7 @@ export default function AdminMessagesPage() {
                     )}
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <span className="text-amber-600 text-xs font-medium">Xem →</span>
+                    <span className="text-amber-600 text-xs font-medium flex items-center justify-end gap-0.5">Xem <ChevronRight className="w-3.5 h-3.5" /></span>
                   </td>
                 </tr>
               ))}
@@ -84,7 +85,7 @@ export default function AdminMessagesPage() {
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm sticky top-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-semibold text-gray-800">Chi tiết tin nhắn</h2>
-              <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-700 text-lg">✕</button>
+              <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-700 p-0.5 rounded transition-colors"><X className="w-5 h-5" /></button>
             </div>
             <div className="space-y-3">
               <div>
@@ -113,9 +114,9 @@ export default function AdminMessagesPage() {
               </div>
               <a
                 href={`mailto:${selected.email}`}
-                className="btn-primary w-full text-center block mt-2"
+                className="btn-primary w-full text-center flex items-center justify-center gap-2 mt-2"
               >
-                ✉️ Phản hồi qua email
+                <Mail className="w-4 h-4" /> Phản hồi qua email
               </a>
             </div>
           </div>

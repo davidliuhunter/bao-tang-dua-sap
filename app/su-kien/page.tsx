@@ -1,6 +1,7 @@
 import PublicLayout from '@/components/PublicLayout';
 import EventCard from '@/components/EventCard';
 import { getPublishedEvents } from '@/lib/data';
+import { CalendarCheck } from 'lucide-react';
 
 export default async function EventsPage() {
   const events = await getPublishedEvents();
@@ -17,7 +18,7 @@ export default async function EventsPage() {
       <div className="container-museum py-12">
         {events.length === 0 ? (
           <div className="text-center py-20 text-amber-600">
-            <div className="text-6xl mb-4">🎪</div>
+            <div className="flex justify-center mb-4"><CalendarCheck className="w-12 h-12 opacity-40" /></div>
             <p className="text-lg">Chưa có sự kiện nào được công bố.</p>
           </div>
         ) : (

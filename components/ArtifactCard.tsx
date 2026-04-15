@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Artifact } from '@/lib/types';
 import ImagePlaceholder from './ImagePlaceholder';
+import { ChevronRight } from 'lucide-react';
 
 export default function ArtifactCard({ artifact }: { artifact: Artifact }) {
   return (
@@ -34,8 +35,8 @@ export default function ArtifactCard({ artifact }: { artifact: Artifact }) {
               {artifact.description}
             </p>
           )}
-          <p className="text-xs text-amber-500 mt-3 font-medium group-hover:text-amber-700 transition-colors">
-            Xem chi tiết →
+          <p className="text-xs text-amber-500 mt-3 font-medium group-hover:text-amber-700 transition-colors flex items-center gap-0.5">
+            Xem chi tiết <ChevronRight className="w-3.5 h-3.5" />
           </p>
         </div>
       </div>

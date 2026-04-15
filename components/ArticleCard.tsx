@@ -1,5 +1,6 @@
 import type { Article } from '@/lib/types';
 import ImagePlaceholder from './ImagePlaceholder';
+import { ChevronRight } from 'lucide-react';
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('vi-VN', {
@@ -29,7 +30,7 @@ export default function ArticleCard({ article }: { article: Article }) {
             <p className="text-sm text-amber-700 leading-relaxed line-clamp-3">{article.summary}</p>
           )}
         </div>
-        <p className="text-xs text-amber-600 font-medium mt-3">Đọc tiếp →</p>
+        <p className="text-xs text-amber-600 font-medium mt-3 flex items-center gap-0.5">Đọc tiếp <ChevronRight className="w-3.5 h-3.5" /></p>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { TreePalm, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function Footer() {
   return (
     <footer className="bg-amber-950 text-amber-100 mt-16">
       <div className="container-museum py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <h3 className="font-serif text-xl font-bold text-white mb-3">🥥 Bảo tàng Dừa Sáp</h3>
+          <h3 className="font-serif text-xl font-bold text-white mb-3 flex items-center gap-2"><TreePalm className="w-5 h-5 text-amber-400" /> Bảo tàng Dừa Sáp</h3>
           <p className="text-amber-300 text-sm leading-relaxed">
             Bảo tàng lưu giữ và giới thiệu giá trị văn hóa, lịch sử của giống
             dừa quý hiếm Dừa Sáp Cầu Kè, Trà Vinh.
@@ -35,10 +36,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-white mb-3">Liên hệ</h4>
           <ul className="space-y-2 text-sm text-amber-300">
-            <li>📍 Huyện Cầu Kè, Tỉnh Trà Vinh</li>
-            <li>📞 (0294) 123 4567</li>
-            <li>✉️ info@baotangduasap.vn</li>
-            <li>⏰ Thứ 2 – CN · 8:00 – 17:00</li>
+            <li className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 shrink-0" /> Huyện Cầu Kè, Tỉnh Trà Vinh</li>
+            <li className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 shrink-0" /> (0294) 123 4567</li>
+            <li className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 shrink-0" /> info@baotangduasap.vn</li>
+            <li className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 shrink-0" /> Thứ 2 – CN · 8:00 – 17:00</li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { X } from 'lucide-react';
 
 interface Props {
   src: string;
@@ -27,11 +28,11 @@ export default function Lightbox({ src, alt, onClose }: Props) {
       onClick={onClose}
     >
       <button
-        className="absolute top-4 right-4 text-white/80 hover:text-white text-3xl leading-none"
+        className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
         onClick={onClose}
         aria-label="Đóng"
       >
-        ✕
+        <X className="w-7 h-7" />
       </button>
       <img
         src={src}

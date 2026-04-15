@@ -1,6 +1,7 @@
 import PublicLayout from '@/components/PublicLayout';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
 import { getPublishedArticles } from '@/lib/data';
+import { ScrollText } from 'lucide-react';
 
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString('vi-VN', {
@@ -25,7 +26,7 @@ export default async function ArticlesPage() {
       <div className="container-museum py-12">
         {articles.length === 0 ? (
           <div className="text-center py-20 text-amber-600">
-            <div className="text-6xl mb-4">📜</div>
+            <div className="flex justify-center mb-4"><ScrollText className="w-12 h-12 opacity-40" /></div>
             <p className="text-lg">Chưa có bài viết nào được xuất bản.</p>
           </div>
         ) : (

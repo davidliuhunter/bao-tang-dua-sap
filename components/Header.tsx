@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { TreePalm, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Trang chủ' },
@@ -23,7 +24,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-9 h-9 bg-amber-400 rounded-full flex items-center justify-center text-amber-900 font-bold text-lg flex-shrink-0">
-              🥥
+              <TreePalm className="w-5 h-5" />
             </div>
             <div className="leading-tight">
               <div className="font-serif font-bold text-base group-hover:text-amber-200 transition-colors">

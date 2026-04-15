@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import ArtifactCard from '@/components/ArtifactCard';
 import type { Artifact, Collection } from '@/lib/types';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const PAGE_SIZE = 8;
 
@@ -47,7 +48,9 @@ export default function ArtifactsClient({ artifacts, collections }: Props) {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
         <div className="relative flex-1">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-400">🔍</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-400">
+            <Search className="w-4 h-4" />
+          </span>
           <input
             type="text"
             placeholder="Tìm theo tên, thời kỳ, chất liệu..."
@@ -87,7 +90,7 @@ export default function ArtifactsClient({ artifacts, collections }: Props) {
       {/* Grid */}
       {paged.length === 0 ? (
         <div className="text-center py-20 text-amber-600">
-          <div className="text-5xl mb-4">🔍</div>
+          <div className="flex justify-center mb-4"><Search className="w-12 h-12 opacity-40" /></div>
           <p className="text-lg">Không tìm thấy hiện vật phù hợp.</p>
           <button onClick={() => { handleSearch(''); handleCollection(''); }} className="mt-4 text-sm text-amber-700 underline">
             Xem tất cả hiện vật
@@ -107,9 +110,9 @@ export default function ArtifactsClient({ artifacts, collections }: Props) {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="px-3 py-1.5 rounded-lg border border-amber-200 text-sm disabled:opacity-40 hover:bg-amber-50"
+            className="px-3 py-1.5 rounded-lg border border-amber-200 text-sm disabled:opacity-40 hover:bg-amber-50 flex items-center gap-1"
           >
-            ← Trước
+            <ChevronLeft className="w-4 h-4" /> Trước
           </button>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
             <button
@@ -127,9 +130,9 @@ export default function ArtifactsClient({ artifacts, collections }: Props) {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="px-3 py-1.5 rounded-lg border border-amber-200 text-sm disabled:opacity-40 hover:bg-amber-50"
+            className="px-3 py-1.5 rounded-lg border border-amber-200 text-sm disabled:opacity-40 hover:bg-amber-50 flex items-center gap-1"
           >
-            Sau →
+            Sau <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       )}

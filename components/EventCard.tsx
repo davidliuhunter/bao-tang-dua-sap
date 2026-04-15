@@ -1,5 +1,6 @@
 import type { EventItem } from '@/lib/types';
 import ImagePlaceholder from './ImagePlaceholder';
+import { CalendarDays, MapPin } from 'lucide-react';
 
 function formatRange(start: string | null, end: string | null) {
   if (!start) return '';
@@ -35,13 +36,13 @@ export default function EventCard({ event, dark }: { event: EventItem; dark?: bo
         <div className="mt-3 space-y-1">
           {event.start_date && (
             <p className={`text-xs flex items-center gap-1.5 ${textMeta}`}>
-              <span>📅</span>
+              <CalendarDays className="w-3.5 h-3.5 shrink-0" />
               {formatRange(event.start_date, event.end_date)}
             </p>
           )}
           {event.location && (
             <p className={`text-xs flex items-center gap-1.5 ${textMeta}`}>
-              <span>📍</span>
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
               {event.location}
             </p>
           )}

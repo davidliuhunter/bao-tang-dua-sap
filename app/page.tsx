@@ -1,9 +1,11 @@
+import React from 'react';
 import Link from 'next/link';
 import PublicLayout from '@/components/PublicLayout';
 import ArtifactCard from '@/components/ArtifactCard';
 import ArticleCard from '@/components/ArticleCard';
 import EventCard from '@/components/EventCard';
 import { getPublishedArtifacts, getPublishedArticles, getPublishedEvents } from '@/lib/data';
+import { TreePalm, Landmark, FlaskConical, CalendarCheck, ChevronRight } from 'lucide-react';
 
 export default async function HomePage() {
   const [artifacts, articles, events] = await Promise.all([
@@ -17,7 +19,11 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-amber-950 via-amber-900 to-amber-700 text-white py-24">
         <div className="container-museum text-center">
-          <div className="text-7xl mb-5 drop-shadow-lg">🥥</div>
+          <div className="flex justify-center mb-5">
+            <div className="w-20 h-20 bg-amber-400/20 rounded-full flex items-center justify-center">
+              <TreePalm className="w-10 h-10 text-amber-300" />
+            </div>
+          </div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold mb-3 drop-shadow">
             Bảo tàng Dừa Sáp
           </h1>
@@ -62,8 +68,8 @@ export default async function HomePage() {
             <h2 className="section-title">Hiện vật nổi bật</h2>
             <p className="section-sub">Những hiện vật đặc sắc trong bộ sưu tập</p>
           </div>
-          <Link href="/hien-vat" className="text-amber-600 hover:text-amber-900 text-sm font-semibold">
-            Xem tất cả →
+          <Link href="/hien-vat" className="text-amber-600 hover:text-amber-900 text-sm font-semibold flex items-center gap-0.5">
+            Xem tất cả <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -88,13 +94,13 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             {([
-              { icon: '🌴', title: 'Giống đặc hữu', desc: 'Dừa sáp chỉ xuất hiện nhiều nhất tại Cầu Kè, tỷ lệ tự nhiên thấp và quý hiếm' },
-              { icon: '🏛️', title: 'Di sản 300 năm', desc: 'Lịch sử trồng và gìn giữ dừa sáp của người Khmer bản địa' },
-              { icon: '🧬', title: 'Khoa học hiện đại', desc: 'Nhân giống nuôi cấy phôi đạt tỷ lệ 90–100% quả sáp' },
-              { icon: '🎪', title: 'Văn hóa sống', desc: 'Lễ hội, triển lãm định kỳ lan tỏa giá trị di sản' },
-            ] as { icon: string; title: string; desc: string }[]).map((item) => (
+            { icon: <TreePalm className="w-7 h-7 text-amber-600" />, title: 'Giống đặc hữu', desc: 'Dừa sáp chỉ xuất hiện nhiều nhất tại Cầu Kè, tỷ lệ tự nhiên thấp và quý hiếm' },
+              { icon: <Landmark className="w-7 h-7 text-amber-600" />, title: 'Di sản 300 năm', desc: 'Lịch sử trồng và gìn giữ dừa sáp của người Khmer bản địa' },
+              { icon: <FlaskConical className="w-7 h-7 text-amber-600" />, title: 'Khoa học hiện đại', desc: 'Nhân giống nuôi cấy phôi đạt tỷ lệ 90–100% quả sáp' },
+              { icon: <CalendarCheck className="w-7 h-7 text-amber-600" />, title: 'Văn hóa sống', desc: 'Lễ hội, triển lãm định kỳ lan tỏa giá trị di sản' },
+            ] as { icon: React.ReactNode; title: string; desc: string }[]).map((item) => (
               <div key={item.title} className="bg-white rounded-xl p-4 shadow-sm border border-amber-100">
-                <div className="text-3xl mb-2">{item.icon}</div>
+                <div className="mb-2">{item.icon}</div>
                 <h4 className="font-semibold text-amber-950 text-sm mb-1">{item.title}</h4>
                 <p className="text-amber-600 text-xs leading-relaxed">{item.desc}</p>
               </div>
@@ -111,7 +117,7 @@ export default async function HomePage() {
               <h2 className="section-title">Bài viết mới nhất</h2>
               <p className="section-sub">Kiến thức và câu chuyện về Dừa Sáp</p>
             </div>
-            <Link href="/bai-viet" className="text-amber-600 hover:text-amber-900 text-sm font-semibold">Xem tất cả →</Link>
+            <Link href="/bai-viet" className="text-amber-600 hover:text-amber-900 text-sm font-semibold flex items-center gap-0.5">Xem tất cả <ChevronRight className="w-4 h-4" /></Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {articles.slice(0, 2).map((a) => (<ArticleCard key={a.id} article={a} />))}
@@ -128,7 +134,7 @@ export default async function HomePage() {
                 <h2 className="font-serif text-3xl font-bold text-white mb-2">Sự kiện sắp tới</h2>
                 <p className="text-amber-300">Đừng bỏ lỡ các hoạt động của bảo tàng</p>
               </div>
-              <Link href="/su-kien" className="text-amber-400 hover:text-amber-300 text-sm font-semibold">Xem tất cả →</Link>
+              <Link href="/su-kien" className="text-amber-400 hover:text-amber-300 text-sm font-semibold flex items-center gap-0.5">Xem tất cả <ChevronRight className="w-4 h-4" /></Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {events.slice(0, 2).map((e) => (<EventCard key={e.id} event={e} dark />))}

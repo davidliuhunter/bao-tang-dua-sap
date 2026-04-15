@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { TreePalm, ChevronLeft } from 'lucide-react';
 
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'btds2026';
 
@@ -31,7 +32,11 @@ export default function LoginPage() {
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div className="p-8">
           <div className="text-center mb-8">
-            <div className="text-6xl mb-3">🥥</div>
+            <div className="flex justify-center mb-3">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center">
+                <TreePalm className="w-8 h-8 text-amber-700" />
+              </div>
+            </div>
             <h1 className="font-serif text-2xl font-bold text-amber-950">Đăng nhập</h1>
             <p className="text-amber-500 text-sm mt-1">Bảo tàng Dừa Sáp · Quản trị viên</p>
           </div>
@@ -74,8 +79,8 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <Link href="/" className="text-amber-500 text-sm hover:text-amber-700 transition-colors">
-              ← Về trang chủ
+            <Link href="/" className="text-amber-500 text-sm hover:text-amber-700 transition-colors flex items-center justify-center gap-1">
+              <ChevronLeft className="w-4 h-4" /> Về trang chủ
             </Link>
           </div>
         </div>

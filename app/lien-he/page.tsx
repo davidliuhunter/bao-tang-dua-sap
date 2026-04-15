@@ -1,8 +1,10 @@
 'use client';
 
+import React from 'react';
 import { useRef, useState } from 'react';
 import PublicLayout from '@/components/PublicLayout';
 import { submitContact } from '@/lib/actions';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -38,14 +40,14 @@ export default function ContactPage() {
           <div className="space-y-4">
             {(
               [
-                { icon: '📍', label: 'Địa chỉ', value: 'Huyện Cầu Kè, Tỉnh Trà Vinh, Việt Nam' },
-                { icon: '📞', label: 'Điện thoại', value: '(0294) 123 4567' },
-                { icon: '✉️', label: 'Email', value: 'info@baotangduasap.vn' },
-                { icon: '⏰', label: 'Giờ mở cửa', value: 'Thứ 2 – Chủ nhật\n8:00 – 17:00' },
-              ] as { icon: string; label: string; value: string }[]
+                { icon: <MapPin className="w-5 h-5 shrink-0 mt-0.5" />, label: 'Địa chỉ', value: 'Huyện Cầu Kè, Tỉnh Trà Vinh, Việt Nam' },
+                { icon: <Phone className="w-5 h-5 shrink-0 mt-0.5" />, label: 'Điện thoại', value: '(0294) 123 4567' },
+                { icon: <Mail className="w-5 h-5 shrink-0 mt-0.5" />, label: 'Email', value: 'info@baotangduasap.vn' },
+                { icon: <Clock className="w-5 h-5 shrink-0 mt-0.5" />, label: 'Giờ mở cửa', value: 'Thứ 2 – Chủ nhật\n8:00 – 17:00' },
+              ] as { icon: React.ReactNode; label: string; value: string }[]
             ).map((item) => (
               <div key={item.label} className="flex gap-4 p-4 bg-amber-50 rounded-xl border border-amber-100">
-                <span className="text-2xl">{item.icon}</span>
+                <span className="text-amber-500">{item.icon}</span>
                 <div>
                   <p className="text-xs text-amber-500 font-semibold mb-0.5">{item.label}</p>
                   <p className="text-amber-950 text-sm whitespace-pre-line">{item.value}</p>

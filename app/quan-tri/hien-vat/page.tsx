@@ -5,6 +5,7 @@ import { getAllArtifacts, getCollections } from '@/lib/data';
 import { saveArtifact, deleteArtifact } from '@/lib/actions';
 import ImageUpload from '@/components/ImageUpload';
 import type { Artifact, Collection } from '@/lib/types';
+import { X } from 'lucide-react';
 
 const EMPTY: Partial<Artifact> = {};
 
@@ -143,9 +144,9 @@ export default function AdminArtifactsPage() {
               <h2 className="font-semibold text-gray-800">{editing.id ? 'Chỉnh sửa' : 'Thêm mới'}</h2>
               <button
                 onClick={() => setEditing(null)}
-                className="text-gray-400 hover:text-gray-700 text-lg leading-none"
+                className="text-gray-400 hover:text-gray-700 p-0.5 rounded transition-colors"
               >
-                ✕
+                <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={handleSave} className="space-y-3">

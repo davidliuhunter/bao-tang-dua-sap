@@ -1,15 +1,17 @@
 'use client';
 
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { LayoutDashboard, Archive, ScrollText, CalendarCheck, Mail, TreePalm, Globe, LogOut } from 'lucide-react';
 
 const navItems = [
-  { href: '/quan-tri', label: 'Tổng quan', icon: '📊' },
-  { href: '/quan-tri/hien-vat', label: 'Hiện vật', icon: '🏺' },
-  { href: '/quan-tri/bai-viet', label: 'Bài viết', icon: '📜' },
-  { href: '/quan-tri/su-kien', label: 'Sự kiện', icon: '🎪' },
-  { href: '/quan-tri/tin-nhan', label: 'Tin nhắn', icon: '✉️' },
+  { href: '/quan-tri', label: 'Tổng quan', icon: <LayoutDashboard className="w-4 h-4" /> },
+  { href: '/quan-tri/hien-vat', label: 'Hiện vật', icon: <Archive className="w-4 h-4" /> },
+  { href: '/quan-tri/bai-viet', label: 'Bài viết', icon: <ScrollText className="w-4 h-4" /> },
+  { href: '/quan-tri/su-kien', label: 'Sự kiện', icon: <CalendarCheck className="w-4 h-4" /> },
+  { href: '/quan-tri/tin-nhan', label: 'Tin nhắn', icon: <Mail className="w-4 h-4" /> },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -45,7 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside className="w-56 flex-shrink-0 bg-amber-950 text-white flex flex-col shadow-xl">
         <div className="p-5 border-b border-amber-800">
-          <div className="text-2xl mb-1">🥥</div>
+          <div className="mb-1"><TreePalm className="w-6 h-6 text-amber-400" /></div>
           <div className="font-serif font-bold text-base text-white">Quản trị</div>
           <div className="text-amber-400 text-xs mt-0.5">Bảo tàng Dừa Sáp</div>
         </div>
@@ -77,13 +79,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             target="_blank"
             className="flex items-center gap-2 px-3 py-2 text-amber-400 hover:text-white text-xs rounded-lg hover:bg-amber-800 transition-colors"
           >
-            🌐 Xem website
+            <Globe className="w-3.5 h-3.5" /> Xem website
           </Link>
           <button
             onClick={logout}
             className="w-full flex items-center gap-2 px-3 py-2 text-amber-400 hover:text-red-300 text-xs rounded-lg hover:bg-amber-800 transition-colors"
           >
-            🚪 Đăng xuất
+            <LogOut className="w-3.5 h-3.5" /> Đăng xuất
           </button>
         </div>
       </aside>
