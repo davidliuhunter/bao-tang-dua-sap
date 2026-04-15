@@ -47,18 +47,18 @@ export default function AdminArticlesPage() {
     });
     setSaving(false);
     if (result.success) {
-      showToast(editing.id ? 'Đã cập nhật bài viết!' : 'Đã thêm bài viết mới!');
+      showToast(editing.id ? 'ÄÃ£ cáº­p nháº­t bÃ i viáº¿t!' : 'ÄÃ£ thÃªm bÃ i viáº¿t má»›i!');
       setEditing(null);
       await reload();
     } else {
-      showToast('Lỗi: ' + result.error);
+      showToast('Lá»—i: ' + result.error);
     }
   }
 
   async function handleDelete(id: string, title: string) {
-    if (!confirm(`Xóa bài viết "${title}"?`)) return;
+    if (!confirm(`XÃ³a bÃ i viáº¿t "${title}"?`)) return;
     await deleteArticle(id);
-    showToast('Đã xóa bài viết.');
+    showToast('ÄÃ£ xÃ³a bÃ i viáº¿t.');
     await reload();
   }
 
@@ -67,11 +67,11 @@ export default function AdminArticlesPage() {
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-serif font-bold text-gray-800">Quản lý Bài viết</h1>
-            <p className="text-gray-500 text-sm">{articles.length} bài viết</p>
+            <h1 className="text-2xl font-serif font-bold text-gray-800">Quáº£n lÃ½ BÃ i viáº¿t</h1>
+            <p className="text-gray-500 text-sm">{articles.length} bÃ i viáº¿t</p>
           </div>
           <button onClick={() => openEdit(EMPTY)} className="btn-primary">
-            + Viết mới
+            + Viáº¿t má»›i
           </button>
         </div>
 
@@ -85,10 +85,10 @@ export default function AdminArticlesPage() {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-600 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left font-medium">Tiêu đề</th>
-                <th className="px-4 py-3 text-left font-medium hidden md:table-cell">Ngày tạo</th>
-                <th className="px-4 py-3 text-left font-medium">Trạng thái</th>
-                <th className="px-4 py-3 text-right font-medium">Thao tác</th>
+                <th className="px-4 py-3 text-left font-medium">TiÃªu Ä‘á»</th>
+                <th className="px-4 py-3 text-left font-medium hidden md:table-cell">NgÃ y táº¡o</th>
+                <th className="px-4 py-3 text-left font-medium">Tráº¡ng thÃ¡i</th>
+                <th className="px-4 py-3 text-right font-medium">Thao tÃ¡c</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -100,17 +100,17 @@ export default function AdminArticlesPage() {
                   </td>
                   <td className="px-4 py-3">
                     <span className={a.status === 'published' ? 'badge-published' : 'badge-draft'}>
-                      {a.status === 'published' ? 'Xuất bản' : 'Nháp'}
+                      {a.status === 'published' ? 'Xuáº¥t báº£n' : 'NhÃ¡p'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => openEdit(a)} className="text-amber-600 hover:text-amber-800 text-xs font-medium">Sửa</button>
-                    <button onClick={() => handleDelete(a.id, a.title)} className="text-red-500 hover:text-red-700 text-xs font-medium">Xóa</button>
+                    <button onClick={() => openEdit(a)} className="text-amber-600 hover:text-amber-800 text-xs font-medium">Sá»­a</button>
+                    <button onClick={() => handleDelete(a.id, a.title)} className="text-red-500 hover:text-red-700 text-xs font-medium">XÃ³a</button>
                   </td>
                 </tr>
               ))}
               {articles.length === 0 && (
-                <tr><td colSpan={4} className="px-4 py-10 text-center text-gray-400">Chưa có bài viết nào</td></tr>
+                <tr><td colSpan={4} className="px-4 py-10 text-center text-gray-400">ChÆ°a cÃ³ bÃ i viáº¿t nÃ o</td></tr>
               )}
             </tbody>
           </table>
@@ -121,176 +121,36 @@ export default function AdminArticlesPage() {
         <div className="w-80 flex-shrink-0">
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm sticky top-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-gray-800">{editing.id ? 'Chỉnh sửa' : 'Bài viết mới'}</h2>
-              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-700 text-lg">✕</button>
+              <h2 className="font-semibold text-gray-800">{editing.id ? 'Chá»‰nh sá»­a' : 'BÃ i viáº¿t má»›i'}</h2>
+              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-700 text-lg">âœ•</button>
             </div>
             <form onSubmit={handleSave} className="space-y-3">
               <div>
-                <label className="form-label">Tiêu đề *</label>
+                <label className="form-label">TiÃªu Ä‘á» *</label>
                 <input name="title" defaultValue={editing.title || ''} required className="form-input" />
               </div>
               <div>
-                <label className="form-label">Tóm tắt</label>
+                <label className="form-label">TÃ³m táº¯t</label>
                 <textarea name="summary" defaultValue={editing.summary || ''} rows={2} className="form-input resize-none" />
               </div>
               <div>
-                <label className="form-label">Nội dung *</label>
+                <label className="form-label">Ná»™i dung *</label>
                 <textarea name="content" defaultValue={editing.content || ''} required rows={6} className="form-input resize-none" />
               </div>
               <div>
-                <label className="form-label">Ảnh bài viết</label>
+                <label className="form-label">áº¢nh bÃ i viáº¿t</label>
                 <ImageUpload currentUrl={imageUrl} onUploaded={(url) => setImageUrl(url)} />
               </div>
               <div>
-                <label className="form-label">Trạng thái</label>
+                <label className="form-label">Tráº¡ng thÃ¡i</label>
                 <select name="status" defaultValue={editing.status || 'draft'} className="form-input">
-                  <option value="draft">Nháp</option>
-                  <option value="published">Xuất bản</option>
+                  <option value="draft">NhÃ¡p</option>
+                  <option value="published">Xuáº¥t báº£n</option>
                 </select>
               </div>
               <div className="flex gap-2 pt-1">
-                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Đang lưu...' : 'Lưu'}</button>
-                <button type="button" onClick={() => setEditing(null)} className="btn-secondary">Hủy</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-
-  async function reload() {
-    setArticles(await getAllArticles());
-  }
-
-  useEffect(() => { reload(); }, []);
-
-  function showToast(msg: string) {
-    setToast(msg);
-    setTimeout(() => setToast(''), 3000);
-  }
-
-  async function handleSave(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!editing) return;
-    setSaving(true);
-    const fd = new FormData(e.currentTarget);
-    const result = await saveArticle({
-      id: editing.id,
-      title: fd.get('title') as string,
-      summary: (fd.get('summary') as string) || null,
-      content: fd.get('content') as string,
-      status: fd.get('status') as 'published' | 'draft',
-      image_url: (fd.get('image_url') as string) || null,
-    });
-    setSaving(false);
-    if (result.success) {
-      showToast(editing.id ? 'Đã cập nhật bài viết!' : 'Đã thêm bài viết mới!');
-      setEditing(null);
-      await reload();
-    } else {
-      showToast('Lỗi: ' + result.error);
-    }
-  }
-
-  async function handleDelete(id: string, title: string) {
-    if (!confirm(`Xóa bài viết "${title}"?`)) return;
-    await deleteArticle(id);
-    showToast('Đã xóa bài viết.');
-    await reload();
-  }
-
-  return (
-    <div className="flex gap-6">
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-serif font-bold text-gray-800">Quản lý Bài viết</h1>
-            <p className="text-gray-500 text-sm">{articles.length} bài viết</p>
-          </div>
-          <button onClick={() => setEditing(EMPTY)} className="btn-primary">
-            + Viết mới
-          </button>
-        </div>
-
-        {toast && (
-          <div className="mb-4 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-2.5 text-sm">
-            {toast}
-          </div>
-        )}
-
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-gray-600 border-b border-gray-200">
-              <tr>
-                <th className="px-4 py-3 text-left font-medium">Tiêu đề</th>
-                <th className="px-4 py-3 text-left font-medium hidden md:table-cell">Ngày tạo</th>
-                <th className="px-4 py-3 text-left font-medium">Trạng thái</th>
-                <th className="px-4 py-3 text-right font-medium">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {articles.map((a) => (
-                <tr key={a.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 font-medium text-gray-800 max-w-xs truncate">{a.title}</td>
-                  <td className="px-4 py-3 text-gray-500 hidden md:table-cell text-xs">
-                    {new Date(a.created_at).toLocaleDateString('vi-VN')}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={a.status === 'published' ? 'badge-published' : 'badge-draft'}>
-                      {a.status === 'published' ? 'Xuất bản' : 'Nháp'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => setEditing(a)} className="text-amber-600 hover:text-amber-800 text-xs font-medium">Sửa</button>
-                    <button onClick={() => handleDelete(a.id, a.title)} className="text-red-500 hover:text-red-700 text-xs font-medium">Xóa</button>
-                  </td>
-                </tr>
-              ))}
-              {articles.length === 0 && (
-                <tr><td colSpan={4} className="px-4 py-10 text-center text-gray-400">Chưa có bài viết nào</td></tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {editing !== null && (
-        <div className="w-80 flex-shrink-0">
-          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm sticky top-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-gray-800">{editing.id ? 'Chỉnh sửa' : 'Bài viết mới'}</h2>
-              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-700 text-lg">✕</button>
-            </div>
-            <form onSubmit={handleSave} className="space-y-3">
-              <div>
-                <label className="form-label">Tiêu đề *</label>
-                <input name="title" defaultValue={editing.title || ''} required className="form-input" />
-              </div>
-              <div>
-                <label className="form-label">Tóm tắt</label>
-                <textarea name="summary" defaultValue={editing.summary || ''} rows={2} className="form-input resize-none" />
-              </div>
-              <div>
-                <label className="form-label">Nội dung *</label>
-                <textarea name="content" defaultValue={editing.content || ''} required rows={6} className="form-input resize-none" />
-              </div>
-              <div>
-                <label className="form-label">Ảnh bài viết</label>
-                <ImageUpload currentUrl={imageUrl} onUploaded={(url) => setImageUrl(url)} />
-              </div>
-              <div>
-                <label className="form-label">Trạng thái</label>
-                <select name="status" defaultValue={editing.status || 'draft'} className="form-input">
-                  <option value="draft">Nháp</option>
-                  <option value="published">Xuất bản</option>
-                </select>
-              </div>
-              <div className="flex gap-2 pt-1">
-                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Đang lưu...' : 'Lưu'}</button>
-                <button type="button" onClick={() => setEditing(null)} className="btn-secondary">Hủy</button>
+                <button type="submit" disabled={saving} className="btn-primary flex-1">{saving ? 'Äang lÆ°u...' : 'LÆ°u'}</button>
+                <button type="button" onClick={() => setEditing(null)} className="btn-secondary">Há»§y</button>
               </div>
             </form>
           </div>
