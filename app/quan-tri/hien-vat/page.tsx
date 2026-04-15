@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getAllArtifacts, getCollections } from '@/lib/data';
 import { saveArtifact, deleteArtifact } from '@/lib/actions';
+import ImageUpload from '@/components/ImageUpload';
 import type { Artifact, Collection } from '@/lib/types';
 
 const EMPTY: Partial<Artifact> = {};
@@ -11,6 +12,7 @@ export default function AdminArtifactsPage() {
   const [artifacts, setArtifacts] = useState<Artifact[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [editing, setEditing] = useState<Partial<Artifact> | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState('');
 
@@ -21,6 +23,11 @@ export default function AdminArtifactsPage() {
   }
 
   useEffect(() => { reload(); }, []);
+
+  function openEdit(a: Partial<Artifact>) {
+    setEditing(a);
+    setImageUrl(a.image_url ?? '');
+  }
 
   function showToast(msg: string) {
     setToast(msg);
@@ -41,7 +48,7 @@ export default function AdminArtifactsPage() {
       material: (fd.get('material') as string) || null,
       collection_id: (fd.get('collection_id') as string) || null,
       status: fd.get('status') as 'published' | 'draft',
-      image_url: (fd.get('image_url') as string) || null,
+      image_url: imageUrl || null,
     });
     setSaving(false);
     if (result.success) {
@@ -69,7 +76,7 @@ export default function AdminArtifactsPage() {
             <h1 className="text-2xl font-serif font-bold text-gray-800">Quản lý Hiện vật</h1>
             <p className="text-gray-500 text-sm">{artifacts.length} hiện vật</p>
           </div>
-          <button onClick={() => setEditing(EMPTY)} className="btn-primary">
+          <button onClick={() => openEdit(EMPTY)} className="btn-primary">
             + Thêm mới
           </button>
         </div>
@@ -102,7 +109,7 @@ export default function AdminArtifactsPage() {
                   </td>
                   <td className="px-4 py-3 text-right space-x-3">
                     <button
-                      onClick={() => setEditing(a)}
+                      onClick={() => openEdit(a)}
                       className="text-amber-600 hover:text-amber-800 text-xs font-medium"
                     >
                       Sửa
@@ -174,8 +181,11 @@ export default function AdminArtifactsPage() {
                 </select>
               </div>
               <div>
-                <label className="form-label">URL ảnh</label>
-                <input name="image_url" defaultValue={editing.image_url || ''} type="url" className="form-input" placeholder="https://..." />
+                <label className="form-label">Ảnh hiện vật</label>
+                <ImageUpload currentUrl={imageUrl} onUploaded={(url) => setImageUrl(url)} />
+                {imageUrl && (
+                  <input type="hidden" name="image_url" value={imageUrl} />
+                )}
               </div>
               <div>
                 <label className="form-label">Trạng thái</label>

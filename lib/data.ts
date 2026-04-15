@@ -119,3 +119,19 @@ export async function getAllContactMessages(): Promise<ContactMessage[]> {
     .order('created_at', { ascending: false });
   return (data as ContactMessage[]) ?? mockContactMessages;
 }
+
+// ─── Top viewed artifacts ─────────────────────────────────────────────────────
+
+export async function getTopViewedArtifacts(limit = 5): Promise<Artifact[]> {
+  if (!isConfigured || !supabase) {
+    return [...mockArtifacts]
+      .sort((a, b) => (b.view_count ?? 0) - (a.view_count ?? 0))
+      .slice(0, limit);
+  }
+  const { data } = await supabase
+    .from('artifacts')
+    .select('id, name, view_count, status')
+    .order('view_count', { ascending: false })
+    .limit(limit);
+  return (data as Artifact[]) ?? [];
+}

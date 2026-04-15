@@ -26,6 +26,7 @@ export interface Artifact {
   collection_id: string | null;
   status: PublishStatus;
   image_url: string | null;
+  view_count: number;
   created_at: string;
   collection?: Collection;
 }

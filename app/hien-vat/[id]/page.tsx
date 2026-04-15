@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PublicLayout from '@/components/PublicLayout';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
+import ArtifactImageClient from '@/components/ArtifactImageClient';
 import { getArtifactById, getPublishedArtifacts } from '@/lib/data';
 
 export async function generateStaticParams() {
@@ -35,17 +35,11 @@ export default async function ArtifactDetailPage({ params }: { params: { id: str
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Image */}
-          <div className="rounded-2xl overflow-hidden bg-amber-100 aspect-square flex items-center justify-center shadow-md">
-            {artifact.image_url ? (
-              <img
-                src={artifact.image_url}
-                alt={artifact.name}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <ImagePlaceholder type="artifact" />
-            )}
-          </div>
+          <ArtifactImageClient
+            artifactId={artifact.id}
+            imageUrl={artifact.image_url}
+            name={artifact.name}
+          />
 
           {/* Details */}
           <div>

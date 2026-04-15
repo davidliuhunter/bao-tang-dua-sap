@@ -1,9 +1,12 @@
 import PublicLayout from '@/components/PublicLayout';
-import ArtifactCard from '@/components/ArtifactCard';
-import { getPublishedArtifacts } from '@/lib/data';
+import ArtifactsClient from '@/components/ArtifactsClient';
+import { getPublishedArtifacts, getCollections } from '@/lib/data';
 
 export default async function ArtifactsPage() {
-  const artifacts = await getPublishedArtifacts();
+  const [artifacts, collections] = await Promise.all([
+    getPublishedArtifacts(),
+    getCollections(),
+  ]);
 
   return (
     <PublicLayout>
@@ -15,18 +18,7 @@ export default async function ArtifactsPage() {
       </div>
 
       <div className="container-museum py-12">
-        {artifacts.length === 0 ? (
-          <div className="text-center py-20 text-amber-600">
-            <div className="text-6xl mb-4">🏛️</div>
-            <p className="text-lg">Chưa có hiện vật nào được xuất bản.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {artifacts.map((a) => (
-              <ArtifactCard key={a.id} artifact={a} />
-            ))}
-          </div>
-        )}
+        <ArtifactsClient artifacts={artifacts} collections={collections} />
       </div>
     </PublicLayout>
   );
