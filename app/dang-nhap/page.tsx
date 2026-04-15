@@ -85,12 +85,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="bg-amber-50 border-t border-amber-100 px-8 py-4 text-center">
-          <p className="text-xs text-amber-500">
-            Demo: <span className="font-mono font-semibold text-amber-700">admin</span> /{' '}
-            <span className="font-mono font-semibold text-amber-700">btds2026</span>
-          </p>
-        </div>
       </div>
     </div>
   );

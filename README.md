@@ -6,8 +6,6 @@ Website bảo tàng Di sản Dừa Sáp Cầu Kè, Trà Vinh.
 
 **Stack:** Next.js 14 · Tailwind CSS · Supabase (PostgreSQL) · Vercel
 
-**Đăng nhập quản trị:** `/dang-nhap` · `admin` / `btds2026`
-
 ## Getting Started
 
 First, run the development server:
