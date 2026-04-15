@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #fdf8f0;
+    --foreground: #1a0d00;
+  }
+}
+
+@layer components {
+  .container-museum {
+    @apply max-w-6xl mx-auto px-4;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply px-5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg font-medium transition-colors text-sm cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-lg font-medium transition-colors text-sm border border-amber-300 cursor-pointer;
+  }
+
+  .btn-danger {
+    @apply px-4 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-800 rounded-lg font-medium transition-colors text-xs border border-red-200 cursor-pointer;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 border border-amber-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent text-sm text-amber-950;
+  }
+
+  .form-label {
+    @apply block text-xs font-medium text-amber-800 mb-1;
+  }
+
+  .badge-published {
+    @apply text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded-full font-medium;
+  }
+
+  .badge-draft {
+    @apply text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full font-medium;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-bold text-amber-950 mb-2;
+  }
+
+  .section-sub {
+    @apply text-amber-600 text-base;
+  }
+
+  .page-hero {
+    @apply bg-gradient-to-r from-amber-900 to-amber-700 text-white py-12;
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
