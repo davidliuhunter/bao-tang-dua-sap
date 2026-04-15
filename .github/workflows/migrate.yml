@@ -40,6 +40,13 @@ jobs:
               inserted_at timestamptz not null default now()
             );" > /dev/null
 
+          # Bootstrap: đánh dấu các migration đã apply thủ công trước đó
+          api_query "insert into supabase_migrations.schema_migrations (version) values
+            ('20240101000000_schema.sql'),
+            ('20240101000001_seed.sql'),
+            ('20260415000000_view_count_and_storage.sql')
+            on conflict (version) do nothing;" > /dev/null
+
           # Lấy danh sách migrations đã apply
           applied=$(api_query "select version from supabase_migrations.schema_migrations;" \
             | jq -r '.[].version // empty')
