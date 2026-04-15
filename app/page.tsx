@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import PublicLayout from '@/components/PublicLayout';
 import ArtifactCard from '@/components/ArtifactCard';
 import ArticleCard from '@/components/ArticleCard';
@@ -17,31 +18,64 @@ export default async function HomePage() {
   return (
     <PublicLayout>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-amber-950 via-amber-900 to-amber-700 text-white py-24">
-        <div className="container-museum text-center">
-          <div className="flex justify-center mb-5">
-            <div className="w-20 h-20 bg-amber-400/20 rounded-full flex items-center justify-center">
-              <TreePalm className="w-10 h-10 text-amber-300" />
-            </div>
+      <section className="relative min-h-[92vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="/main_bg.png"
+          alt="Bảo tàng Dừa Sáp Trà Vinh"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Multi-layer overlay: darkens bottom more for readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-amber-950/90 via-amber-900/50 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center text-white px-4 py-20 max-w-4xl mx-auto">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/40 text-amber-200 text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+            <TreePalm className="w-4 h-4 text-amber-300" />
+            Di sản văn hóa · Cầu Kè · Trà Vinh
           </div>
-          <h1 className="font-serif text-5xl md:text-6xl font-bold mb-3 drop-shadow">
+
+          <h1 className="font-serif font-bold leading-tight mb-4 drop-shadow-lg"
+              style={{ fontSize: 'clamp(2.5rem, 8vw, 4.5rem)' }}>
             Bảo tàng Dừa Sáp
           </h1>
-          <p className="text-amber-300 text-xl mb-3 font-medium tracking-wide">
-            Cầu Kè · Trà Vinh · Việt Nam
+          <p className="text-amber-300 font-semibold tracking-widest uppercase text-sm md:text-base mb-4 drop-shadow">
+            Cầu Kè &nbsp;·&nbsp; Trà Vinh &nbsp;·&nbsp; Việt Nam
           </p>
-          <p className="text-amber-100 max-w-2xl mx-auto text-base leading-relaxed mt-4 opacity-90">
-            Nơi lưu giữ và tôn vinh giá trị văn hóa, lịch sử của giống dừa quý hiếm — niềm tự hào đặc sản của vùng đất Cầu Kè.
+
+          {/* Divider */}
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="h-px w-16 bg-amber-400/60" />
+            <div className="w-2 h-2 rounded-full bg-amber-400/80" />
+            <div className="h-px w-16 bg-amber-400/60" />
+          </div>
+
+          <p className="text-white/90 max-w-2xl mx-auto text-base md:text-lg leading-relaxed drop-shadow mb-10">
+            Nơi lưu giữ và tôn vinh giá trị văn hóa, lịch sử của giống dừa quý hiếm —{' '}
+            <span className="text-amber-300 font-medium">niềm tự hào đặc sản của vùng đất Cầu Kè</span>.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
-            <Link href="/hien-vat" className="px-8 py-3 bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold rounded-full transition-all shadow-lg hover:scale-105">
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/hien-vat"
+              className="px-8 py-3.5 bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold rounded-full transition-all shadow-xl hover:scale-105 hover:shadow-amber-400/30 text-sm md:text-base"
+            >
               Khám phá hiện vật
             </Link>
-            <Link href="/bai-viet" className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/40 font-semibold rounded-full transition-all hover:scale-105">
+            <Link
+              href="/bai-viet"
+              className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white border border-white/50 font-semibold rounded-full transition-all hover:scale-105 backdrop-blur-sm text-sm md:text-base"
+            >
               Đọc bài viết
             </Link>
           </div>
         </div>
+
       </section>
 
       {/* Stats */}

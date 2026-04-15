@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import ProgressBar from "@/components/ProgressBar";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased bg-amber-50 text-amber-950">
+        <ProgressBar />
         {children}
       </body>
     </html>
